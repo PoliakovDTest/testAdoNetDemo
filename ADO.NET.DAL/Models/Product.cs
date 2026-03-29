@@ -8,4 +8,5 @@ public class Product
     public decimal Price { get; set; }
     public bool IsPurchased { get; set; }
     public string UserName { get; set; }
+    // тествовый комит 
 }
