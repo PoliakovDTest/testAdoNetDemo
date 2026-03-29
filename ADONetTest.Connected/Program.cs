@@ -1,0 +1,90 @@
+﻿using System;
+using ADO.NET.DAL;
+using ADO.NET.DAL.Models;
+
+namespace ADONetTest.Connected;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        try
+        {
+            //var connection = DbConnectionFactory.GetPostgreSqlConnection();
+            var connection = DbConnectionFactory.GetSqLiteConnection();
+            var context = new ConnectedContext(connection);
+
+            // var productList = context.GetAllProducts();
+            // foreach (var product in productList)
+            // {
+            //     Console.WriteLine($"{product.Id}-{product.Name} - {product.Price} - {product.Quantity} - {product.UserName}");
+            // }
+            
+            // var newUser = new User()
+            // {
+            //     Name = "John Doe",
+            //     IsDriver = true,
+            // };
+            //
+            // context.InsertNewUser(newUser);
+            
+            
+            //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+            
+            
+            //var users = context.GetAllUsers();
+
+            // Console.WriteLine("До SQL Инъекции");
+            // foreach (var user in users)
+            //     {
+            //         Console.WriteLine($"{user.Id}-{user.Name} - [{(user.IsDriver?"Водитель":"Пешеход")}]");
+            //     }
+            //
+            //  var newUser = new User()
+            // {
+            //     Name = "1',false); DROP TABLE table_users; --",
+            //     IsDriver = true,
+            // };
+            //
+            // context.InsertNewUser(newUser);
+            //
+            // Console.WriteLine("После SQL Инъекции");
+            //
+            // users = context.GetAllUsers();
+            //
+            // Console.WriteLine("До SQL Инъекции");
+            // foreach (var user in users)
+            // {
+            //     Console.WriteLine($"{user.Id}-{user.Name} - [{(user.IsDriver?"Водитель":"Пешеход")}]");
+            // }
+            //
+            
+            
+            //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+            
+            
+            var newUser = new User()
+            {
+                Name = "1',false); DROP TABLE table_users; --",
+                   IsDriver = true,
+            };
+            
+            context.InsertNewUserWithParameters(newUser);
+            
+            var users = context.GetAllUsers();
+            foreach (var user in users)
+                {
+                    Console.WriteLine($"{user.Id}-{user.Name} - [{(user.IsDriver?"Водитель":"Пешеход")}]");
+                }
+            
+            
+            Console.ReadLine();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("Ошибка: " + e.Message);
+        }
+        
+
+    }
+}
