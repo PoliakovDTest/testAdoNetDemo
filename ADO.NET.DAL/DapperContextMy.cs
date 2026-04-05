@@ -3,7 +3,7 @@ using ADO.NET.DAL.Models;
 using Dapper;
 
 namespace ADO.NET.DAL;
-
+//asdasdasda
 public class DapperContextMy(DbConnection connection)
 {
     private readonly DbConnection _connection = connection;
